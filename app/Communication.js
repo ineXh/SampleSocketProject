@@ -28,7 +28,7 @@ function Communication(io){
 			client.id = id;
 		    console.log(client.Name + ' has joined. Id: ' + id);
 	    	if(this.playerlist[id] == undefined) this.playerlist[id] = client;
-	    	this.playerlist[id].Online = true;
+	    	if(this.playerlist[id] != undefined) this.playerlist[id].Online = true;
 
 	    	socket.emit('welcome', client.Name);
 	    	socket.broadcast.emit('news', client.Name + " has joined.");
@@ -38,8 +38,13 @@ function Communication(io){
 			id = client.id;
 			//delete(this.playerlist[id]);
 			//this.playerIds.push(id);
-			client.Online = false;
-			//this.playerlist[id].Online = false;
+			if(this.playerlist[id] != undefined){
+				this.playerlist[id].Online = false;	
+			}else{
+				console.log('Error in onDisconnect')
+				console.log('id: ' + id)
+				console.log(this.playerlist)
+			}
 		    console.log(client.Name + ' has Left.');
 		    socket.broadcast.emit('news', client.Name + " has left.");
 		    sendPlayerList();
