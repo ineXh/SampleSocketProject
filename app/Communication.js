@@ -12,7 +12,7 @@ function Communication(io){
 	
 	this.io = io;	
 	io.on('connection', function(socket){
-		console.log('a user connected');
+		//console.log('a user connected');
 		var client = {
 			"Name": "",
 		  	"id": -1,
@@ -38,7 +38,8 @@ function Communication(io){
 			id = client.id;
 			//delete(this.playerlist[id]);
 			//this.playerIds.push(id);
-			this.playerlist[id].Online = false;
+			client.Online = false;
+			//this.playerlist[id].Online = false;
 		    console.log(client.Name + ' has Left.');
 		    socket.broadcast.emit('news', client.Name + " has left.");
 		    sendPlayerList();
