@@ -40,7 +40,9 @@ var socket;
 var id = getRandomInt(0, 10);
 var name;
 var Engine = (function(global) {
-	socket = io.connect('http://localhost:3002/', {reconnection: false});		
+	//socket = io.connect('http://localhost:3002/', {reconnection: false});
+	socket = io.connect('https://ancient-cove-94904.herokuapp.com/', {reconnection: false});
+	
 	socket.on('welcome', onWelcome);
 	socket.on('news', onNews);
 	socket.on('player list', onPlayerList);
